@@ -1,5 +1,4 @@
--- ROCKET MM2 v2.0 (Fluent Edition)
--- Встроенная библиотека Fluent + весь функционал
+-- ROCKET MM2 v2.0 (Fluent Edition) — БЕЗ ОШИБКИ FIRE
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local VIM = game:GetService("VirtualInputManager")
@@ -8,7 +7,7 @@ local Debris = game:GetService("Debris")
 local player = Players.LocalPlayer
 
 -- ============================================================
--- БИБЛИОТЕКА FLUENT (встроенная)
+-- БИБЛИОТЕКА FLUENT (исправленная)
 -- ============================================================
 local Fluent = {}
 Fluent.__index = Fluent
@@ -84,7 +83,12 @@ function Fluent:CreateWindow(title, size, position)
 
         table.insert(window.TabButtons, btn)
         table.insert(window.Tabs, tab)
-        if #window.Tabs == 1 then btn.MouseButton1Click:Fire() end
+
+        -- Исправлено: активируем первую вкладку без вызова Fire
+        if #window.Tabs == 1 then
+            tab.Frame.Visible = true
+            window.ActiveTab = tab
+        end
 
         tab.Elements = {}
 
@@ -392,4 +396,4 @@ task.wait(0.5)
 updateESP()
 updateDistances()
 
-print("ROCKET MM2 v2.0 (Fluent) загружен. Внешний вид как у snpware.")
+print("ROCKET MM2 v2.0 (Fluent) загружен. Ошибка Fire исправлена.")
